@@ -232,7 +232,6 @@ int main() {
 	scores.open("assets//txt//high_scores.txt");
 	for (int i = 0; i < 10; i++) {
 		scores >> highscoresarray[i];
-		cout << highscoresarray[i];
 		cout << endl;
 	}
 	scores.close();
@@ -691,7 +690,6 @@ int main() {
 			}
 
 			if ((playSprite.getGlobalBounds().contains(mousepos.x, mousepos.y) && Mouse::isButtonPressed(Mouse::Button::Left)) || Keyboard::isKeyPressed(Keyboard::Key::Enter) && menudisplay) {
-				cout << "yeah!" << endl;
 				gameStarted = true;
 				paused = false;
 			}
@@ -734,7 +732,6 @@ int main() {
 		}
 
 
-		cout << mousepos.x << endl << mousepos.y << endl;
 
 		stringstream ss;
 		if (!gameStarted) {
@@ -884,7 +881,6 @@ int main() {
 					scoreSound.play();
 				}
 			}
-			cout << "Score: " << score << endl;
 
 
 			if (U1pipecheck.x < -100) {
@@ -898,7 +894,6 @@ int main() {
 					scoreSound.play();
 				}
 			}
-			cout << "Score: " << score << endl;
 
 			if (U2pipecheck.x < -100) {
 				U2pipePosy = randomizer();
@@ -911,12 +906,10 @@ int main() {
 					scoreSound.play();
 				}
 			}
-			cout << "Score: " << score << endl;
 
 
 			if (collisionDetection(birdySprite, UpipeSprite, U1pipeSprite, U2pipeSprite, IpipeSprite, I1pipeSprite, I2pipeSprite))
 			{
-				cout << "collision" << endl;
 				errorSound.play();
 				currentscore = score;														// COLLISION DETECTION AND OPERATIONS
 				score = 0;
