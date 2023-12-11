@@ -256,7 +256,7 @@ int main() {
 	gamestate >> savescore;
 	gamestate.close();
 
-	RenderWindow window(VideoMode(1360, 768), "window", Style::Resize | Style::Titlebar | Style::Close);
+	RenderWindow window(VideoMode(1360, 768), "window", Style::Resize | Style::Titlebar);
 
 	srand(time(0));
 
@@ -793,13 +793,14 @@ int main() {
 			textDraw(score, highScorePrint, highScoreString, window, highScoresList, 'o', highscoresarray, highScoresList);
 			window.draw(overSprite);
 			window.draw(highScoreString);
-
+			birdyPosy = 0.5f * 768;
+			velocity = 0;
 
 			if (Keyboard::isKeyPressed(Keyboard::Key::Enter)) {
-
 				score = 0;
 				currentscore = 0;
-				birdySprite.setPosition(birdyPosx, birdyPosy);
+				birdySprite.setPosition(birdyPosx,320);
+
 				UpipePosy = randomizer();
 				U1pipePosy = randomizer();
 				U2pipePosy = randomizer();
@@ -832,6 +833,10 @@ int main() {
 			}
 			velocity += gravity;
 			birdyPosy += velocity;
+			if (birdySprite.getPosition().y>760)
+			{
+				velocity = 0;
+			}
 			birdySprite.setPosition(birdyPosx, birdyPosy);
 
 
@@ -926,8 +931,16 @@ int main() {
 					}
 				}
 				int speed = -2;
-
 			}
+		}
+		if (birdySprite.getPosition().y > 760)
+		{
+			birdySprite.setPosition(birdyPosx,birdyPosy);
+			gameover = true;
+		}
+		else if (birdySprite.getPosition().y < 0)
+		{
+			birdyPosy = 0;
 		}
 		window.draw(muteMusic);
 		if (Keyboard::isKeyPressed(Keyboard::Key::M))
@@ -949,6 +962,9 @@ int main() {
 		}
 		textDraw(score, highScorePrint, scoreText, window, highScoreText, 'g', highscoresarray, highScoresList);
 		score1.close();
+		cout << birdySprite.getPosition().y << endl;;
+		cout << velocity << endl;
+		cout << gameover << endl;
 		window.display();
 	}
 	return 0;
